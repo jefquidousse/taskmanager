@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+<a th:href="'/'">back</a>
+<a th:href="'newTask'">New Task</a>
+<div class="panel panel-primary">
+    <div class="panel-heading"><h1>Current tasks</h1></div>
+    <div th:if="${tasks != null}" th:each="task : ${tasks}" class="panel-body text-center">
+        <div th:text="(*{task.name}) + ' due on: ' + (*{task.getDateString()})" class="row"></div>
+        <div><a th:href="@{'tasks/'+${task.id}}">info</a>  <a th:href="@{'edit/'+${task.id}}">edit</a> </div>
+    </div>
+    <div th:unless="${!tasks.isEmpty()}" class="panel-body text-center">
+        <div th:text="'No tasks left to do'" class="row"></div>
+    </div>
+</div>
+
+</body>
+</html>

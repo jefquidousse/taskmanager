@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Description</title>
+</head>
+<body>
+<a th:href="'/task'">back</a>
+<h1>Task Detail</h1>
+<h4>Title:</h4>
+<p th:text="(${task.name})" ></p>
+<h4>Description:</h4>
+<p th:text="(${task.description})"></p>
+<h4>Due date:</h4>
+<p th:text="(${task.getDateString()})"></p>
+<h4>Subtasks</h4>
+<div th:each="subtask : ${task.subtasks}" class="panel-body text-center">
+    <div th:text="(*{subtask.subtaskName}) + ' description: ' + (*{subtask.subtaskDescription})" class="row"></div>
+</div>
+
+<a th:href="@{'/'+${task.id}+'/sub/create'}">Create Subtask</a>
+</body>
+</html>

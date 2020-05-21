@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<h1>Edit</h1>
+<a th:href="'/task'">Back</a>
+<form th:action="@{'/update/'+${task.getId()}}" method="post">
+    <label for="name" th:text="#{taskName}"></label><br>
+    <input type="text" id="name" name="name" th:value="*{task.getName()}"><br>
+    <label for="description" th:text="#{taskDescr}"></label><br>
+    <input type="text" id="description" name="description" th:value="*{task.getDescription()}"><br>
+    <label for="date" th:text="#taskD">Due date:</label><br>
+    <input type="datetime-local" name="date" id="date" th:value="*{task.getDate()}"><br><br>
+    <input type="submit" value="submit">
+</form>
+
+</body>
+</html>
