@@ -5,22 +5,39 @@
     <title>Form</title>
 </head>
 <body>
+<span th:text="#{lang.change}"></span>:
+<select id="locales">
+    <option value=""></option>
+    <option value="en" th:text="#{lang.eng}"></option>
+    <option value="nl" th:text="#{lang.nl}"></option>
+</select>
 <h1>New Task</h1>
 <form method="post" action="/new">
     <div>
-        <label for="tname">Task Name:</label>
+        <label for="tname" th:text="#{taskName}"></label>
         <input type="text" id="tname" name="tname">
 
     </div>
     <div>
-        <label for="tdescription">Description:</label>
+        <label for="tdescription" th:text="#{taskDescr}"></label>
         <input type="text" id="tdescription" name="tdescription">
     </div>
     <div>
-        <label for="tdate">Due date:</label>
+        <label for="tdate" th:text="#{taskDue}"></label>
         <input type="datetime-local" name="tdate" id="tdate">
     </div>
     <input type="submit" value="submit">
 </form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != ''){
+                window.location.replace('international?lang=' + selectedOption);
+            }
+        });
+    });
+</script>
 </body>
 </html>

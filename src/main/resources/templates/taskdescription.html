@@ -5,19 +5,35 @@
     <title>Description</title>
 </head>
 <body>
-<a th:href="'/task'">back</a>
-<h1>Task Detail</h1>
-<h4>Title:</h4>
+<span th:text="#{lang.change}"></span>:
+<select id="locales">
+    <option value=""></option>
+    <option value="en" th:text="#{lang.eng}"></option>
+    <option value="nl" th:text="#{lang.nl}"></option>
+</select>
+<a th:href="'/task'" th:text="#{back}"></a>
+<h1 th:text="#{taskdetail}"></h1>
+<h4 th:text="#{title}">Title:</h4>
 <p th:text="(${task.name})" ></p>
-<h4>Description:</h4>
+<h4 th:text="#{taskDescr}"></h4>
 <p th:text="(${task.description})"></p>
-<h4>Due date:</h4>
+<h4 th:text="#{taskDue}"></h4>
 <p th:text="(${task.getDateString()})"></p>
-<h4>Subtasks</h4>
+<h4 th:text="#{subtasks}"></h4>
 <div th:each="subtask : ${task.subtasks}" class="panel-body text-center">
     <div th:text="(*{subtask.subtaskName}) + ' description: ' + (*{subtask.subtaskDescription})" class="row"></div>
 </div>
 
-<a th:href="@{'/'+${task.id}+'/sub/create'}">Create Subtask</a>
+<a th:href="@{'/'+${task.id}+'/sub/create'}" th:text="#{createsub}"></a>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != ''){
+                window.location.replace('international?lang=' + selectedOption);
+            }
+        });
+    });
+</script>
 </body>
 </html>

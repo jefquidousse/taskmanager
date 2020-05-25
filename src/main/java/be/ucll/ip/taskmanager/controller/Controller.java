@@ -96,7 +96,7 @@ public class Controller {
         return "taskdescription";
     }
 
-    /*@Configuration
+    @Configuration
     public class WebConfig implements WebMvcConfigurer {
 
         @Bean
@@ -117,7 +117,7 @@ public class Controller {
         public void addInterceptors(InterceptorRegistry registry){
             registry.addInterceptor(localeChangeInterceptor());
         }
-    }*/
+    }
 
 
 }
