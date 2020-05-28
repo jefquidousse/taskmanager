@@ -5,30 +5,31 @@
     <title>Create Subtask</title>
 </head>
 <body>
-<span th:text="#{lang.change}"></span>:
+<span th:text="#{lang.change}"></span>
 <select id="locales">
     <option value=""></option>
     <option value="en" th:text="#{lang.eng}"></option>
     <option value="nl" th:text="#{lang.nl}"></option>
 </select>
-<a th:href="'/' + ${task.getId()}">back</a>
+<a th:href="'/tasks/' + ${task.getId()}" th:text="#{back}"></a>
 <div>
-    <h1>New Subtask</h1>
+    <h1 th:text="#{newsub}"></h1>
     <form method="post" th:action="@{'/'+${task.getId()}+'/subtask'}">
         <label for="tname" th:text="#{taskName}"></label><br>
         <input type="text" id="tname" name="tname"><br>
         <label for="tdescription" th:text="#{taskDescr}"></label><br>
         <input type="text" id="tdescription" name="tdescription"><br><br>
-        <input type="submit" value="submit">
+        <input type="submit" value="Save">
     </form>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
 <script type="text/javascript">
     $(document).ready(function() {
         $("#locales").change(function () {
             var selectedOption = $('#locales').val();
             if (selectedOption != ''){
-                window.location.replace('international?lang=' + selectedOption);
+                window.location.replace(window.location.pathname + '?lang=' + selectedOption);
             }
         });
     });

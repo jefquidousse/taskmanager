@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Description</title>
+    <style>
+        p, div{
+            text-align: center;
+            font-size: 18px;
+            text-decoration:  none;
+        }
+        h4, h1{
+             text-align: center;
+             font-size: 18px;
+             text-decoration:  none;
+         }
+        h1{
+            font-size: 24px;
+        }
+        a{
+            font-size: 18px;
+            text-decoration:  none;
+            align-content: baseline;
+        }
+
+    </style>
 </head>
 <body>
 <span th:text="#{lang.change}"></span>:
+
 <select id="locales">
     <option value=""></option>
     <option value="en" th:text="#{lang.eng}"></option>
@@ -13,7 +35,7 @@
 </select>
 <a th:href="'/task'" th:text="#{back}"></a>
 <h1 th:text="#{taskdetail}"></h1>
-<h4 th:text="#{title}">Title:</h4>
+<h4 th:text="#{title}"></h4>
 <p th:text="(${task.name})" ></p>
 <h4 th:text="#{taskDescr}"></h4>
 <p th:text="(${task.description})"></p>
@@ -21,16 +43,18 @@
 <p th:text="(${task.getDateString()})"></p>
 <h4 th:text="#{subtasks}"></h4>
 <div th:each="subtask : ${task.subtasks}" class="panel-body text-center">
-    <div th:text="(*{subtask.subtaskName}) + ' description: ' + (*{subtask.subtaskDescription})" class="row"></div>
+    <div th:text="(*{subtask.subtaskName}) + ' ' + #{descr} + (*{subtask.subtaskDescription})" class="row"></div>
 </div>
 
 <a th:href="@{'/'+${task.id}+'/sub/create'}" th:text="#{createsub}"></a>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
 <script type="text/javascript">
     $(document).ready(function() {
         $("#locales").change(function () {
             var selectedOption = $('#locales').val();
             if (selectedOption != ''){
-                window.location.replace('international?lang=' + selectedOption);
+                window.location.replace(window.location.pathname + '?lang=' + selectedOption);
             }
         });
     });

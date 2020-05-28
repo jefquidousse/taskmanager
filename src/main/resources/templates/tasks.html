@@ -3,20 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Tasks</title>
+    <style>
+        div{
+            text-align: center;
+            font-size: 18px;
+            text-decoration:  none;
+        }
+    </style>
 </head>
 <body>
-<a th:href="'/'">back</a>
-<a th:href="'newTask'">New Task</a>
+<span th:text="#{lang.change}"></span>
+<select id="locales">
+    <option value=""></option>
+    <option value="en" th:text="#{lang.eng}"></option>
+    <option value="nl" th:text="#{lang.nl}"></option>
+</select>
+<a th:href="'/'" th:text="#{back}"></a>
+<a th:href="'newTask'" th:text="#{newTask}"></a>
 <div class="panel panel-primary">
-    <div class="panel-heading"><h1>Current tasks</h1></div>
+    <div class="panel-heading"><h1 th:text="#{current}"></h1></div>
     <div th:if="${tasks != null}" th:each="task : ${tasks}" class="panel-body text-center">
-        <div th:text="(*{task.name}) + ' due on: ' + (*{task.getDateString()})" class="row"></div>
-        <div><a th:href="@{'tasks/'+${task.id}}">info</a>  <a th:href="@{'edit/'+${task.id}}">edit</a> </div>
+        <div th:text="(*{task.name}) + ' ' + #{due} + (*{task.getDateString()})" class="row"></div>
+        <div><a th:href="@{'tasks/'+${task.id}}">info</a>  <a th:href="@{'edit/'+${task.id}}" th:text="#{edit}"></a> </div>
     </div>
     <div th:unless="${!tasks.isEmpty()}" class="panel-body text-center">
         <div th:text="'No tasks left to do'" class="row"></div>
     </div>
 </div>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != ''){
+                window.location.replace(window.location.pathname + '?lang=' + selectedOption);
+            }
+        });
+    });
+</script>
 </body>
 </html>

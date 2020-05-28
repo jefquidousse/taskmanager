@@ -11,7 +11,8 @@
     <option value="en" th:text="#{lang.eng}"></option>
     <option value="nl" th:text="#{lang.nl}"></option>
 </select>
-<h1>New Task</h1>
+<a th:href="'/task'" th:text="#{back}"></a>
+<h1 th:text="#{newTask}"></h1>
 <form method="post" action="/new">
     <div>
         <label for="tname" th:text="#{taskName}"></label>
@@ -26,15 +27,17 @@
         <label for="tdate" th:text="#{taskDue}"></label>
         <input type="datetime-local" name="tdate" id="tdate">
     </div>
-    <input type="submit" value="submit">
+    <input type="submit" value="Save">
 </form>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
 <script type="text/javascript">
     $(document).ready(function() {
         $("#locales").change(function () {
             var selectedOption = $('#locales').val();
             if (selectedOption != ''){
-                window.location.replace('international?lang=' + selectedOption);
+                window.location.replace(window.location.pathname + '?lang=' + selectedOption);
             }
         });
     });
