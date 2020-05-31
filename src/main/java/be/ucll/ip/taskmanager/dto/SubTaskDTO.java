@@ -1,4 +1,4 @@
-package be.ucll.ip.taskmanager.domain;
+package be.ucll.ip.taskmanager.dto;
 
 import be.ucll.ip.taskmanager.dto.TaskDTO;
 
@@ -6,32 +6,24 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 
-@Entity
-@Table(name = "subtasks")
-public class Subtask {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int subtaskId;
+public class SubTaskDTO {
 
     @NotEmpty
     private String subtaskName;
 
+    private int subtaskId;
 
-
+    @NotEmpty
     private String subtaskDescription;
 
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Task.class)
-    @JoinColumn(name = "taskId", nullable = false)
-    private Task task;
 
-    public Subtask(String  subtaskName, String description){
+    public SubTaskDTO(String  subtaskName, String description){
         this.subtaskDescription = description;
         this.subtaskName = subtaskName;
     }
 
-    public Subtask(){};
+    public SubTaskDTO(){};
 
     public String getSubtaskName() {
         return subtaskName;
@@ -57,11 +49,4 @@ public class Subtask {
         this.subtaskId = subtaskId;
     }
 
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
-    }
 }

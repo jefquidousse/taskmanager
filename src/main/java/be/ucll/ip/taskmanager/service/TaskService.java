@@ -1,7 +1,6 @@
 package be.ucll.ip.taskmanager.service;
 
-import be.ucll.ip.taskmanager.domain.Subtask;
-import be.ucll.ip.taskmanager.domain.Task;
+import be.ucll.ip.taskmanager.dto.SubTaskDTO;
 import be.ucll.ip.taskmanager.dto.TaskDTO;
 
 import java.util.List;
@@ -13,7 +12,7 @@ public interface TaskService {
 
     void addTask(TaskDTO task);
 
-    void addSubtask(Subtask taskDTO, int id);
+    void addSubtask(SubTaskDTO taskDTO, int id);
 
     void editTask(TaskDTO taskDTO);
 }

@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit</title>
+    <style>
+        #error{
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <span th:text="#{lang.change}"></span>:
@@ -11,11 +16,14 @@
     <option value="en" th:text="#{lang.eng}"></option>
     <option value="nl" th:text="#{lang.nl}"></option>
 </select>
-<a th:href="'/task'" th:text="#{back}"></a>
+<a th:href="'/tasks'" th:text="#{back}"></a>
 <h1 th:text="#{edit}"></h1>
 
 
 <form th:action="@{'/update/'+${task.getId()}}" method="post">
+    <div th:if="${error != null}" id="error">
+        <div th:text="#{error}"></div>
+    </div>
     <label for="name" th:text="#{taskName}"></label><br>
     <input type="text" id="name" name="name" th:value="*{task.getName()}"><br>
     <label for="description" th:text="#{taskDescr}"></label><br>

@@ -33,7 +33,7 @@
     <option value="en" th:text="#{lang.eng}"></option>
     <option value="nl" th:text="#{lang.nl}"></option>
 </select>
-<a th:href="'/task'" th:text="#{back}"></a>
+<a th:href="'/tasks'" th:text="#{back}"></a>
 <h1 th:text="#{taskdetail}"></h1>
 <h4 th:text="#{title}"></h4>
 <p th:text="(${task.name})" ></p>
@@ -42,11 +42,14 @@
 <h4 th:text="#{taskDue}"></h4>
 <p th:text="(${task.getDateString()})"></p>
 <h4 th:text="#{subtasks}"></h4>
-<div th:each="subtask : ${task.subtasks}" class="panel-body text-center">
+<div th:if="${subtasks != null}" th:each="subtask : ${subtasks}" class="panel-body text-center">
     <div th:text="(*{subtask.subtaskName}) + ' ' + #{descr} + (*{subtask.subtaskDescription})" class="row"></div>
 </div>
+<div th:unless="${!task.subtasks.isEmpty()}">
+    <div th:text="#{noSub}"></div>
+</div>
 
-<a th:href="@{'/'+${task.id}+'/sub/create'}" th:text="#{createsub}"></a>
+<a th:href="@{'/tasks/'+${task.id}+'/sub/create'}" th:text="#{createsub}"></a>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
 </script>
 <script type="text/javascript">

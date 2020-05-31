@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
+    <style>
+        .error{
+            color:red;
+        }
+    </style>
 </head>
 <body>
 <span th:text="#{lang.change}"></span>:
@@ -11,9 +16,15 @@
     <option value="en" th:text="#{lang.eng}"></option>
     <option value="nl" th:text="#{lang.nl}"></option>
 </select>
-<a th:href="'/task'" th:text="#{back}"></a>
+<a th:href="'/tasks'" th:text="#{back}"></a>
 <h1 th:text="#{newTask}"></h1>
 <form method="post" action="/new">
+    <div th:if="${error != null}" class="error">
+        <div th:text="#{error}"></div>
+    </div>
+    <div th:if="${date}" class="error">
+        <div th:text="#{dateError}"></div>
+    </div>
     <div>
         <label for="tname" th:text="#{taskName}"></label>
         <input type="text" id="tname" name="tname">

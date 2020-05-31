@@ -9,6 +9,9 @@
             font-size: 18px;
             text-decoration:  none;
         }
+        #error{
+             color: red;
+         }
     </style>
 </head>
 <body>
@@ -19,15 +22,17 @@
     <option value="nl" th:text="#{lang.nl}"></option>
 </select>
 <a th:href="'/'" th:text="#{back}"></a>
-<a th:href="'newTask'" th:text="#{newTask}"></a>
+<a th:href="'tasks/new'" th:text="#{newTask}"></a>
 <div class="panel panel-primary">
     <div class="panel-heading"><h1 th:text="#{current}"></h1></div>
-    <div th:if="${tasks != null}" th:each="task : ${tasks}" class="panel-body text-center">
+    <div th:if="${error != null}" id="error">
+        <div th:text="#{notFound}"></div>
+    </div>    <div th:if="${tasks != null}" th:each="task : ${tasks}" class="panel-body text-center">
         <div th:text="(*{task.name}) + ' ' + #{due} + (*{task.getDateString()})" class="row"></div>
-        <div><a th:href="@{'tasks/'+${task.id}}">info</a>  <a th:href="@{'edit/'+${task.id}}" th:text="#{edit}"></a> </div>
+        <div><a th:href="@{'tasks/'+${task.id}}">info</a>  <a th:href="@{'tasks/edit/'+${task.id}}" th:text="#{edit}"></a> </div>
     </div>
     <div th:unless="${!tasks.isEmpty()}" class="panel-body text-center">
-        <div th:text="'No tasks left to do'" class="row"></div>
+        <div th:text="#{noTasks}" class="row"></div>
     </div>
 </div>
 

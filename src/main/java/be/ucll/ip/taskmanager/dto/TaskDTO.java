@@ -4,7 +4,9 @@ package be.ucll.ip.taskmanager.dto;
 
 import be.ucll.ip.taskmanager.domain.Subtask;
 
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +17,14 @@ public class TaskDTO {
     private int taskid;
 
 
-    @NotEmpty
+    @NotEmpty(message = "Please fill the title in")
     private String taskname;
 
+    @NotEmpty(message = "Please fill the description in")
     private String description;
 
+    @NotNull
+    @Future
     private LocalDateTime date;
 
     private List<Subtask> subtasks = new ArrayList<>();

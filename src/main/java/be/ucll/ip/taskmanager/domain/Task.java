@@ -13,17 +13,18 @@ import java.util.List;
 @Table(name= "TASKS")
 public class Task {
 
-    @NotEmpty
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int taskid;
+
+    @NotEmpty(message = "Please fill the title in")
     private String taskname;
 
     @NotNull
     @Future
     private LocalDateTime date;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int taskid;
-
+    @NotEmpty(message = "Please fill the description in")
     private String description;
 
     @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

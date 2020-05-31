@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Subtask</title>
+    <style>
+        #error{
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <span th:text="#{lang.change}"></span>
@@ -15,6 +20,9 @@
 <div>
     <h1 th:text="#{newsub}"></h1>
     <form method="post" th:action="@{'/'+${task.getId()}+'/subtask'}">
+        <div th:if="${error != null}" id="error">
+            <div th:text="#{error}"></div>
+        </div>
         <label for="tname" th:text="#{taskName}"></label><br>
         <input type="text" id="tname" name="tname"><br>
         <label for="tdescription" th:text="#{taskDescr}"></label><br>

@@ -2,7 +2,9 @@ package be.ucll.ip.taskmanager.service;
 
 import be.ucll.ip.taskmanager.domain.Subtask;
 import be.ucll.ip.taskmanager.domain.Task;
+import be.ucll.ip.taskmanager.dto.SubTaskDTO;
 import be.ucll.ip.taskmanager.dto.TaskDTO;
+import be.ucll.ip.taskmanager.repository.SubTaskRepo;
 import be.ucll.ip.taskmanager.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,12 @@ import java.util.stream.Collectors;
 @Service
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskrepo;
+    private final SubTaskRepo subTaskRepo;
 
     @Autowired
-    public TaskServiceImpl(TaskRepository taskrepo){
+    public TaskServiceImpl(TaskRepository taskrepo, SubTaskRepo subTaskRepo){
         this.taskrepo = taskrepo;
+        this.subTaskRepo = subTaskRepo;
     }
 
     @Override
@@ -51,9 +55,16 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void addSubtask(Subtask subtask, int id) {
+    public void addSubtask(SubTaskDTO subtask, int id) {
         Task task = taskrepo.getOne(id);
-        task.addSubtasks(subtask);
+
+        Subtask t = new Subtask();
+        t.setSubtaskDescription(subtask.getSubtaskDescription());
+        t.setSubtaskId(subtask.getSubtaskId());
+        t.setSubtaskName(subtask.getSubtaskName());
+        t.setTask(task);
+
+        subTaskRepo.save(t);
     }
 
     @Override
